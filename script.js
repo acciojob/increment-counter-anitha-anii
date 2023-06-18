@@ -8,3 +8,17 @@ let count = 0;
         count++;
         para.textContent = count;
       });
+
+describe('Increment Counter', () => {
+  it('should increment the counter and display the un-incremented value in an alert', () => {
+    cy.visit('your-webpage-url');
+
+    cy.get('#incrementBtn').click();
+
+    cy.on('window:alert', (alertText) => {
+      expect(alertText).to.eq('Un-incremented value: 0');
+    });
+
+    cy.get('#counter').should('have.text', '1');
+  });
+});
